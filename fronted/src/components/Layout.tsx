@@ -3,6 +3,7 @@ import { useAuth } from "@/contexts/AuthContext"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { NavLink } from "@/components/NavLink"
+import ThemeToggle from "@/components/ThemeToggle"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Menu01Icon, ShoppingCart01Icon, MenuRestaurantIcon } from "@hugeicons/core-free-icons"
 import { useState } from "react"
@@ -44,6 +45,7 @@ export default function Layout() {
           </nav>
 
           <div className="hidden md:flex items-center gap-2">
+            <ThemeToggle />
             {user ? (
               <Button variant="outline" onClick={logout}>Logout</Button>
             ) : (
@@ -75,6 +77,9 @@ export default function Layout() {
                   </>
                 )}
                 <div className="border-t pt-4">
+                  <div className="flex justify-center mb-4">
+                    <ThemeToggle />
+                  </div>
                   {user ? (
                     <Button variant="outline" className="w-full" onClick={() => { logout(); closeSheet() }}>Logout</Button>
                   ) : (
@@ -93,6 +98,38 @@ export default function Layout() {
       <main className="flex-1 container mx-auto px-4 py-6">
         <Outlet />
       </main>
+
+      <footer className="border-t bg-muted/30">
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center gap-2 text-lg font-bold text-primary mb-2">
+                <HugeiconsIcon icon={MenuRestaurantIcon} className="h-5 w-5" />
+                FoodieHub
+              </div>
+              <p className="text-sm text-muted-foreground">Delicious food, delivered fast. Your favorite restaurants at your fingertips.</p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-sm mb-3">Quick Links</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link to="/" className="hover:text-foreground transition-colors">Home</Link></li>
+                <li><Link to="/login" className="hover:text-foreground transition-colors">Login</Link></li>
+                <li><Link to="/register" className="hover:text-foreground transition-colors">Register</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold text-sm mb-3">Contact</h3>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li>support@foodiehub.com</li>
+                <li>+1 (555) 123-4567</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t mt-8 pt-4 text-center text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} FoodieHub. All rights reserved.
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
