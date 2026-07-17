@@ -9,7 +9,7 @@ async function registerUser(req, res) {
 
     const isUserAlreadyExists = await userModel.findOne({
         email
-    },process.env.JWT_SECRET)
+    })
 
     if (isUserAlreadyExists) {
         return res.status(400).json({
